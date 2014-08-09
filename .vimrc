@@ -2,6 +2,7 @@ set hidden
 nnoremap ' `
 nnoremap ` '
 set history=1000
+set so=7
 set wildmenu
 set wildmode=list:longest
 set wildignore=*.o,*.fasl,*.pyc,*~
@@ -9,7 +10,7 @@ set ignorecase
 set smartcase
 set title
 set tags=tags;~/ 
-
+""set clipboard=unnamedplus
 
 set smartindent 
 set tabstop=8
@@ -19,8 +20,10 @@ set softtabstop=4
 "set mouse=a
 "set runtimepath+=$HOME/.vim/vim-haml
 syntax on
+""colorscheme desert
+"set background=dark
 filetype plugin indent on
-"set modeline
+set modeline
 set number
 set ts=4
 let g:js_indent_log = 1
@@ -40,7 +43,7 @@ let g:pylint_signs = 1
 let g:pylint_inline_highlight = 1
 let g:pylint_conventions = 1
 let g:pylint_warning = 1
-nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+""nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
 
 :map <C-a> GVgg
 :map <C-n> :enew
@@ -69,8 +72,8 @@ set hlsearch
 set incsearch
 set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
-
-
+:map f :foldopen <Enter>
+:map F :foldclose <Enter>
 set statusline=%<%f%<%{FileTime()}%<%h%m%r%=%-20.(line=%03l,col=%02c%V,totlin=%L%)\%h%m%r%=%-30(,BfNm=%n%Y%)\%P\*%=%{CurTime()}
 "set rulerformat=%15(%c%V\ %p%%%)
 set rulerformat=%<%f%<%{FileTime()}%<%h%m%r%=%-20.(line=%03l,col=%02c%V,totlin=%L%)\%h%m%r%=%-30(,BfNm=%n%Y%)\%P\*%=%{CurTime()}
@@ -139,5 +142,39 @@ set ttymouse=xterm2
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 " }}}:
-
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 execute pathogen#infect()
+
+
+" IMPORTANT: Uncomment one of the following lines to force
+" using 256 colors (or 88 colors) if your terminal supports it,
+" but does not automatically use 256 colors by default.
+"set t_Co=256
+"set t_Co=88
+""""if (&t_Co == 256 || &t_Co == 88) && !has('gui_running') &&
+""""    \ filereadable(expand("$HOME/.vim/plugin/guicolorscheme.vim"))
+  " Use the guicolorscheme plugin to makes 256-color or 88-color
+  " terminal use GUI colors rather than cterm colors.
+""""  runtime! plugin/guicolorscheme.vim
+"  runtime! plugin/industry.vim
+"  runtime! plugin/desert.vim
+"  GuiColorScheme rastafari
+""  GuiColorScheme industry
+""""  GuiColorScheme github
+"  GuiColorScheme desert
+"""" else
+  " For 8-color 16-color terminals or for gvim, just use the
+  " regular :colorscheme command.
+"  colorscheme rastafari
+""""  colorscheme github
+"  colorscheme desert
+"""" endif
+
+""colorscheme github
+set term=xterm-256color
+colorscheme codeschool 
+
+command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
+command Sudowrite w ! sudo tee % 
+command Noindent setl noai nocin nosi inde=
+command DeleteEmptyLines :g/^$/d
