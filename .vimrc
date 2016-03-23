@@ -25,20 +25,20 @@ syntax on
 
 set nocompatible
 filetype off 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
 filetype plugin indent on
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 augroup vimrc_autocmds
     autocmd!
     autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
     autocmd FileType python match Excess /\%120v.*/
     autocmd FileType python set nowrap
 augroup END
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 "set guifont=PowerlineSymbols
-let g:Powerline_symbols = 'fancy'
-Bundle 'tpope/vim-fugitive'
+"let g:Powerline_symbols = 'fancy'
+"Bundle 'tpope/vim-fugitive'
 set modeline
 set number
 set ts=4
